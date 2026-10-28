@@ -1,37 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SpendWise | Personal Finance</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0; min-height: 100vh;
-      background: #080d18; color: #f1f5f9;
-      font-family: Arial, sans-serif;
-      display: grid; place-items: center;
-      padding: 24px;
-    }
-    main { max-width: 620px; text-align: center; }
-    .logo { color: #67e8f9; font-size: 18px; font-weight: bold; }
-    h1 { font-size: clamp(40px, 9vw, 64px); margin: 24px 0 12px; }
-    p { color: #a8b3c7; line-height: 1.7; }
-    .tag {
-      display: inline-block; margin-top: 18px;
-      border: 1px solid #164e63; border-radius: 30px;
-      padding: 10px 16px; color: #67e8f9;
-    }
-    footer { margin-top: 50px; font-size: 12px; color: #64748b; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SpendWise — Dashboard</title>
+<style>
+:root{--bg:#080d18;--panel:#101827;--panel2:#151f30;--border:#263348;--text:#eef4ff;--muted:#8d9bb1;--cyan:#67e8f9;--blue:#60a5fa;--green:#4ade80;--red:#fb7185;--purple:#c4b5fd}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,select{font:inherit}.app{min-height:100vh;display:flex}.sidebar{width:230px;background:#0b1220;border-right:1px solid var(--border);padding:25px 16px;display:flex;flex-direction:column;flex-shrink:0}.brand{font-size:21px;font-weight:800;letter-spacing:-.7px;padding:0 10px 35px}.brand span{color:var(--cyan)}.nav-label{font-size:10px;letter-spacing:1.6px;color:#63738b;padding:0 12px 10px}.nav{display:flex;align-items:center;gap:12px;padding:12px;border-radius:10px;color:var(--muted);font-size:13px;margin-bottom:5px}.nav.active{color:var(--cyan);background:#12303b;border:1px solid #1d4652}.nav .ico{width:19px;text-align:center;font-size:16px}.sidebar-bottom{margin-top:auto;padding:14px 12px;color:#64748b;font-size:11px;line-height:1.7}.main{flex:1;min-width:0;padding:30px clamp(16px,3vw,38px);max-width:1500px;margin:auto}.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:28px}.eyebrow{color:var(--cyan);font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase}.topbar h1{font-size:clamp(24px,4vw,31px);margin:7px 0 0;letter-spacing:-1px}.date{color:var(--muted);font-size:12px;margin-top:7px}.avatar{border:1px solid var(--border);background:var(--panel);border-radius:12px;padding:10px 13px;font-size:12px;color:#d5deec;white-space:nowrap}.welcome{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:23px}.welcome h2{font-size:17px;margin:0 0 6px}.welcome p{margin:0;color:var(--muted);font-size:12px}.btn{border:1px solid #2a5967;background:#10303b;color:var(--cyan);padding:11px 15px;border-radius:10px;font-weight:700;font-size:12px;cursor:pointer}.btn:hover{filter:brightness(1.15)}.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:18px}.card{background:linear-gradient(145deg,#121c2c,#0e1624);border:1px solid var(--border);border-radius:15px;padding:18px;min-width:0}.card-top{display:flex;justify-content:space-between;align-items:center;gap:8px;color:var(--muted);font-size:11px}.card-icon{height:32px;width:32px;border-radius:10px;display:grid;place-items:center;background:#16313b;color:var(--cyan);font-size:16px}.card-value{font-size:clamp(20px,2.4vw,28px);font-weight:750;letter-spacing:-.8px;margin:18px 0 8px;overflow-wrap:anywhere}.card-foot{font-size:10px;color:var(--muted)}.positive{color:var(--green)}.negative{color:var(--red)}.grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(260px,1fr);gap:16px;margin-bottom:18px}.panel{background:var(--panel);border:1px solid var(--border);border-radius:15px;padding:20px;min-width:0}.panel-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:20px}.panel h3{font-size:14px;margin:0}.panel-sub{color:var(--muted);font-size:11px;margin-top:5px}.select{background:#0b1220;border:1px solid var(--border);color:#b9c7db;padding:8px;border-radius:8px;font-size:11px}.chart{height:190px;display:flex;align-items:end;gap:clamp(7px,2vw,18px);padding:10px 5px 0;border-bottom:1px solid var(--border);position:relative}.chart:before,.chart:after{content:"";position:absolute;left:0;right:0;border-top:1px dashed #243247}.chart:before{top:33%}.chart:after{top:66%}.bar-group{height:100%;flex:1;display:flex;align-items:end;justify-content:center;gap:4px;position:relative;z-index:1}.bar{width:min(20px,40%);min-width:7px;border-radius:5px 5px 0 0;background:linear-gradient(180deg,#67e8f9,#258ba4);opacity:.95}.bar.exp{background:linear-gradient(180deg,#818cf8,#4f46e5)}.month-labels{display:flex;justify-content:space-around;color:#71819a;font-size:10px;padding-top:10px}.legend{display:flex;gap:16px;margin-top:15px;color:var(--muted);font-size:10px}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;background:var(--cyan)}.dot.purple{background:#818cf8}.budget-list{display:flex;flex-direction:column;gap:19px}.budget-row{display:flex;justify-content:space-between;gap:8px;font-size:11px;margin-bottom:8px}.budget-row span:last-child{color:var(--muted)}.progress{height:7px;border-radius:10px;background:#263247;overflow:hidden}.progress span{display:block;height:100%;border-radius:10px;background:linear-gradient(90deg,#22d3ee,#60a5fa)}.progress .warn{background:linear-gradient(90deg,#fb7185,#f59e0b)}.transactions{overflow:hidden}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;text-align:left;white-space:nowrap}th{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:#73839a;font-weight:700;padding:12px 9px;border-bottom:1px solid var(--border)}td{padding:14px 9px;border-bottom:1px solid #202c3e;font-size:11px;color:#cbd5e1}tr:last-child td{border-bottom:0}.tx-name{display:flex;align-items:center;gap:10px}.tx-icon{width:32px;height:32px;border-radius:10px;background:#1a2b3c;display:grid;place-items:center}.tx-main{font-weight:650;color:#e5edf8}.tx-sub{font-size:9px;color:var(--muted);margin-top:4px}.pill{font-size:9px;padding:5px 8px;border-radius:20px;background:#1b2b3b;color:#9db0c9}.amount{font-weight:700}.amount.in{color:var(--green)}.amount.out{color:#fda4af}.bottom-note{text-align:center;color:#53647c;font-size:10px;padding:15px 0 3px}.mobile-nav{display:none}.empty{color:var(--muted);font-size:12px;padding:20px 0}
+@media(max-width:1000px){.sidebar{width:190px}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.grid{grid-template-columns:1fr}}
+@media(max-width:620px){.app{display:block}.sidebar{display:none}.main{padding:22px 14px 88px}.topbar{margin-bottom:24px}.avatar{font-size:10px;padding:9px}.welcome{align-items:flex-start}.welcome .btn{padding:10px;font-size:11px}.cards{gap:9px}.card{padding:13px;border-radius:12px}.card-top{font-size:10px;align-items:flex-start}.card-icon{width:27px;height:27px}.card-value{font-size:22px;margin:15px 0 7px}.card-foot{font-size:9px}.panel{padding:15px;border-radius:13px}.chart{height:160px}.grid{gap:12px}.mobile-nav{position:fixed;z-index:5;bottom:0;left:0;right:0;display:flex;justify-content:space-around;background:#0b1220;border-top:1px solid var(--border);padding:11px 5px calc(11px + env(safe-area-inset-bottom))}.mobile-nav div{text-align:center;color:#8796ac;font-size:9px}.mobile-nav b{display:block;font-size:17px;margin-bottom:4px;font-weight:500}.mobile-nav .selected{color:var(--cyan)}}
+</style>
 </head>
 <body>
-  <main>
-    <div class="logo">◈ SPENDWISE</div>
-    <h1>Take control of your money.</h1>
-    <p>A personal finance and expense tracker designed to help you manage income, monitor spending, organize transactions, and plan monthly budgets.</p>
-    <div class="tag">Personal Finance · DBMS Project</div>
-    <footer>SpendWise — Personal Finance and Expense Tracker</footer>
-  </main>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand">◈ Spend<span>Wise</span></div>
+  <div class="nav-label">WORKSPACE</div>
+  <div class="nav active"><span class="ico">▦</span> Dashboard</div>
+  <div class="nav"><span class="ico">↔</span> Transactions</div>
+  <div class="nav"><span class="ico">▤</span> Categories</div>
+  <div class="nav"><span class="ico">◔</span> Reports & Analytics</div>
+  <div class="nav"><span class="ico">◎</span> Monthly Budgets</div>
+  <div class="sidebar-bottom">PERSONAL FINANCE<br>Organize today. Plan tomorrow.</div>
+</aside>
+<main class="main">
+  <header class="topbar">
+    <div><div class="eyebrow">PERSONAL FINANCE OVERVIEW</div><h1>Dashboard</h1><div class="date" id="today">Your money, in focus.</div></div>
+    <div class="avatar">● &nbsp; My Workspace</div>
+  </header>
+  <section class="welcome">
+    <div><h2>Welcome to SpendWise 👋</h2><p>Here's your financial snapshot for this month.</p></div>
+    <button class="btn" onclick="alert('Transaction entry is the next feature we will add to SpendWise.')">＋ Add transaction</button>
+  </section>
+  <section class="cards">
+    <article class="card"><div class="card-top">Total Balance <span class="card-icon">◈</span></div><div class="card-value">₹24,680</div><div class="card-foot"><span class="positive">●</span> Available balance</div></article>
+    <article class="card"><div class="card-top">Total Income <span class="card-icon">↗</span></div><div class="card-value">₹32,500</div><div class="card-foot"><span class="positive">+12.8%</span> from last month</div></article>
+    <article class="card"><div class="card-top">Total Expenses <span class="card-icon">↘</span></div><div class="card-value">₹7,820</div><div class="card-foot"><span class="negative">−4.3%</span> from last month</div></article>
+    <article class="card"><div class="card-top">Savings Rate <span class="card-icon">◎</span></div><div class="card-value">75.9%</div><div class="card-foot">Income minus expenses</div></article>
+  </section>
+  <section class="grid">
+    <article class="panel">
+      <div class="panel-head"><div><h3>Cash Flow</h3><div class="panel-sub">Income vs expenses over time</div></div><select class="select" aria-label="Chart period"><option>Last 6 months</option><option>This year</option></select></div>
+      <div class="chart" aria-label="Illustrative income and expense chart">
+        <div class="bar-group"><span class="bar" style="height:63%"></span><span class="bar exp" style="height:28%"></span></div>
+        <div class="bar-group"><span class="bar" style="height:76%"></span><span class="bar exp" style="height:40%"></span></div>
+        <div class="bar-group"><span class="bar" style="height:55%"></span><span class="bar exp" style="height:32%"></span></div>
+        <div class="bar-group"><span class="bar" style="height:84%"></span><span class="bar exp" style="height:45%"></span></div>
+        <div class="bar-group"><span class="bar" style="height:69%"></span><span class="bar exp" style="height:35%"></span></div>
+        <div class="bar-group"><span class="bar" style="height:91%"></span><span class="bar exp" style="height:43%"></span></div>
+      </div>
+      <div class="month-labels"><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span></div>
+      <div class="legend"><span><i class="dot"></i>Income</span><span><i class="dot purple"></i>Expenses</span></div>
+    </article>
+    <article class="panel">
+      <div class="panel-head"><div><h3>Monthly Budgets</h3><div class="panel-sub">Spending by category</div></div><span class="pill">October</span></div>
+      <div class="budget-list">
+        <div><div class="budget-row"><span>🍜 Food & Dining</span><span>₹2,400 / ₹4,000</span></div><div class="progress"><span style="width:60%"></span></div></div>
+        <div><div class="budget-row"><span>🚗 Transport</span><span>₹1,200 / ₹2,000</span></div><div class="progress"><span style="width:60%"></span></div></div>
+        <div><div class="budget-row"><span>🛍️ Shopping</span><span>₹2,800 / ₹3,000</span></div><div class="progress"><span class="warn" style="width:93%"></span></div></div>
+        <div><div class="budget-row"><span>📱 Utilities</span><span>₹720 / ₹1,500</span></div><div class="progress"><span style="width:48%"></span></div></div>
+      </div>
+    </article>
+  </section>
+  <section class="panel transactions">
+    <div class="panel-head"><div><h3>Recent Transactions</h3><div class="panel-sub">A quick look at your latest activity</div></div><button class="btn" onclick="alert('Full transaction management is the next feature we will add.')">View all ↗</button></div>
+    <div class="table-wrap"><table><thead><tr><th>Transaction</th><th>Category</th><th>Date</th><th>Amount</th></tr></thead><tbody>
+      <tr><td><div class="tx-name"><span class="tx-icon">🛒</span><div><div class="tx-main">Grocery Store</div><div class="tx-sub">Card payment</div></div></div></td><td><span class="pill">Food</span></td><td>Oct 27, 2026</td><td class="amount out">−₹1,250</td></tr>
+      <tr><td><div class="tx-name"><span class="tx-icon">💼</span><div><div class="tx-main">Monthly Stipend</div><div class="tx-sub">Bank transfer</div></div></div></td><td><span class="pill">Income</span></td><td>Oct 25, 2026</td><td class="amount in">+₹12,000</td></tr>
+      <tr><td><div class="tx-name"><span class="tx-icon">🚕</span><div><div class="tx-main">Ride Service</div><div class="tx-sub">UPI payment</div></div></div></td><td><span class="pill">Transport</span></td><td>Oct 24, 2026</td><td class="amount out">−₹340</td></tr>
+      <tr><td><div class="tx-name"><span class="tx-icon">📶</span><div><div class="tx-main">Mobile Recharge</div><div class="tx-sub">UPI payment</div></div></div></td><td><span class="pill">Utilities</span></td><td>Oct 22, 2026</td><td class="amount out">−₹299</td></tr>
+    </tbody></table></div>
+  </section>
+  <div class="bottom-note">SpendWise · Personal Finance and Expense Tracker · DBMS Project</div>
+</main>
+</div>
+<nav class="mobile-nav"><div class="selected"><b>▦</b>Home</div><div><b>↔</b>Activity</div><div><b>＋</b>Add</div><div><b>◔</b>Reports</div><div><b>◎</b>Budget</div></nav>
+<script>
+const d = new Date();
+document.getElementById("today").textContent = d.toLocaleDateString("en-IN",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+</script>
 </body>
 </html>
